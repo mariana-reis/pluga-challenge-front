@@ -37,7 +37,7 @@ export function ToolBrowser() {
   return (
     <div className="flex flex-col gap-8 max-w-7xl mx-auto p-6 sm:p-10">
       <h1 className="text-4xl font-bold text-center text-gray-900 mb-6">
-        Pluga Challenge Front
+        Pluga Ferramentas Integradas
       </h1>
 
       <SearchInput value={search} onChange={setSearch} />
