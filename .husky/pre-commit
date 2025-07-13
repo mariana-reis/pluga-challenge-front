@@ -1,0 +1,8 @@
+echo '🔍 Rodando ESLint...'
+pnpm lint
+
+echo '🎨 Rodando Prettier...'
+pnpm format
+
+echo '🧪 Rodando testes unitários...'
+pnpm test
