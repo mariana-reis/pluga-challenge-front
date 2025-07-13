@@ -1,0 +1,47 @@
+name: CI - Build & Quality Check
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    name: ✅ Continuous Integration - Quality, Tests & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout do código-fonte
+        uses: actions/checkout@v4
+
+      - name: 📦 Instalar PNPM CLI
+        uses: pnpm/action-setup@v4.1.0
+        with:
+          version: 8
+          run_install: false
+
+      - name: 🧰 Configurar ambiente Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: 📥 Instalar dependências do projeto
+        run: pnpm install
+
+      - name: 🔍 Verificar formatação com Prettier
+        run: pnpm format --check
+
+      - name: 🧹 Analisar código com ESLint
+        run: pnpm lint
+
+      - name: 🧪 Executar testes unitários (Jest)
+        run: pnpm test
+
+      - name: 🔨 Gerar build de produção (Next.js)
+        run: pnpm build
